@@ -90,7 +90,7 @@ exports.signin = (req, res) => {
       }
 
       var token = jwt.sign({ id: user.id }, config.secret, {
-        expiresIn: 86400 // 24 hours
+        expiresIn: 3600 // 1 hour
       });
 
       var authorities = [];
@@ -107,3 +107,14 @@ exports.signin = (req, res) => {
       });
     });
 };
+
+exports.validate = (req, res) => {
+  var token = jwt.verify(req.body.accessToken,config.secret,(err,decoded)=>{
+    if(err){
+      return res.status(504).send(err);
+    }else{
+      return res.status(200).send(decoded);
+    }
+  });
+
+}

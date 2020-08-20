@@ -1,8 +1,7 @@
+const controller = require("../controllers/parametros.controller");
 const { authJwt } = require("../middlewares");
-const controller = require("../controllers/recorde.controller");
 
 module.exports = function (app) {
-    
     app.use(function (req, res, next) {
         res.header(
             "Access-Control-Allow-Headers",
@@ -11,6 +10,8 @@ module.exports = function (app) {
         next();
     });
 
-    app.get("/api/recordes", controller.recordes);
+    app.get("/api/parametros", controller.parametros);
+
+    app.post("/api/parametros/contatos", [authJwt.verifyToken, authJwt.isAdmin] ,controller.alterarContatos);
 
 };

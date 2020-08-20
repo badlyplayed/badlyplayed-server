@@ -40,7 +40,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const db = require("./app/models");
 const Role = db.role;
 const Recorde = db.recorde;
-const Historia = db.historia;
+const Parametros = db.recorde;
 
 // Database parameters
 db.mongoose
@@ -66,6 +66,7 @@ app.get("/", (req, res) => {
 require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
 require("./app/routes/recorde.routes")(app);
+require("./app/routes/parametros.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
@@ -126,5 +127,23 @@ function initial() {
     }
   });
 
-  
+  Parametros.estimatedDocumentCount((err, count) => {
+    if (!err && count === 0) {
+
+      new Parametros({
+        instagram: '@badlyplayedofficial',
+        facebook: '#badlyplayed',
+        email: 'me@badlyplayed.com',
+        tweeter:'@badlyplayed',
+        youtube:'#badlyPlayedChannel'
+      }).save(err => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("Parametros adicionado a coleção");
+      });
+
+    }
+  });
 }
