@@ -29,7 +29,10 @@ const Historia = mongoose.model(
             type:Number,
             required:true
         },
-        data: Date,
+        data: {
+            type:Date,
+            default: Date.now
+        },
         printscreen: String,
         pais: {
             type:String,
@@ -42,6 +45,11 @@ const Historia = mongoose.model(
         foiPunido: {
             type: String,
             enum: ['sim', 'nao', 'naosei'],
+            required:true
+        },
+        verificado: {
+            type: Boolean,
+            default:false,
             required:true
         }
     })

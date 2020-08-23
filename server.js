@@ -38,6 +38,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require("./app/models");
+const Historia = require("./app/models/historia.model");
 const Role = db.role;
 const Recorde = db.recorde;
 const Parametros = db.recorde;
@@ -67,6 +68,7 @@ require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
 require("./app/routes/recorde.routes")(app);
 require("./app/routes/parametros.routes")(app);
+require("./app/routes/historia.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
@@ -142,6 +144,30 @@ function initial() {
         }
 
         console.log("Parametros adicionado a coleção");
+      });
+
+    }
+  });
+
+  Historia.estimatedDocumentCount((err, count) => {
+    if (!err && count === 0) {
+      new Historia({
+        nome:'Arthur Klug Neto',
+        idade:33,
+        genero:'masculino',
+        jogo:'Super Mario World',
+        dataDia:08,
+        dataMes:11,
+        dataAno:1986,
+        pais:'Brasil',
+        detalhes:'O KopaTropa ficou me trollando na fase 1-1 e saiu voando',
+        foiPunido:'nao'
+      }).save(err => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("Historia adicionado a coleção");
       });
 
     }
