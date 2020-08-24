@@ -13,8 +13,13 @@ module.exports = function (app) {
 
     // TODO : Allow both moderator and admin
     app.get("/api/historias",
-        [authJwt.verifyToken, authJwt.isAdmin ],
+        [authJwt.verifyToken, authJwt.isAdminOrModerator ],
         controller.getAllHistorias
+    );
+
+    app.get("/api/historias/:id",
+        [authJwt.verifyToken, authJwt.isAdminOrModerator ],
+        controller.getHistoriaById
     );
 
     app.post("/api/historias",controller.insertHistoria);

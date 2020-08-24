@@ -8,6 +8,17 @@ exports.getAllHistorias = (req, res) => {
     });
 }
 
+exports.getHistoriaById = (req, res) => {
+    if( req.params["id"] != undefined ){
+        id = req.params["id"];
+        Historia.find({"_id":id}).limit(1).exec((err, data) => {
+            res.status(200).send(data);
+        });
+    }else{
+        res.status(500).send({"message":"no id provided","ok":"false"});
+    }    
+}
+
 exports.insertHistoria = (req, res) => {
     
     // request.headers['x-forwarded-for']
