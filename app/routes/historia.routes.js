@@ -24,8 +24,8 @@ module.exports = function (app) {
 
     app.post("/api/historias",controller.insertHistoria);
 
-    app.post("/api/historias/apagar",[authJwt.verifyToken, authJwt.isAdmin ],controller.apagarHistoria);
+    app.post("/api/historias/apagar",[authJwt.verifyToken, authJwt.isAdminOrModerator ],controller.apagarHistoria);
 
-    app.post("/api/historias/atualizar",[authJwt.verifyToken, authJwt.isAdmin ],controller.atualizarHistoria);
+    app.post("/api/historias/atualizar",[authJwt.verifyToken, authJwt.isAdminOrModerator ],controller.atualizarHistoria);
 
 };
