@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/096119cf-7d63-4f6d-a4f1-d0d0e4a137a4/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/badlyplayed-server",
+    "appService.deploySubpath": "."
+}

@@ -38,6 +38,11 @@ app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// AZURE DB PATH
+// const dbPath = `mongodb://badlyplayed:iV24v0B85ulNMgQCfrlFAH9Bfjaz2dQA4w43Fz0MnGWGxr2xXob2vObgtUI1b8zfPkuq4fEPkcrkw4vUS94zhg==@badlyplayed.mongo.cosmos.azure.com:10255/?ssl=true&appName=@badlyplayed@`;
+// LOCAL && LOCAL EC2 AWS
+const dbPath = `mongodb://localhost:27017/badlyplayed_db`;
+
 const db = require("./app/models");
 const Historia = require("./app/models/historia.model");
 const Role = db.role;
@@ -46,7 +51,7 @@ const Parametros = db.recorde;
 
 // Database parameters
 db.mongoose
-  .connect(`mongodb://badlyplayed:iV24v0B85ulNMgQCfrlFAH9Bfjaz2dQA4w43Fz0MnGWGxr2xXob2vObgtUI1b8zfPkuq4fEPkcrkw4vUS94zhg==@badlyplayed.mongo.cosmos.azure.com:10255/?ssl=true&appName=@badlyplayed@`, {
+  .connect(dbPath, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
