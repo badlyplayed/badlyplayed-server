@@ -3,7 +3,7 @@ const db = require("../models");
 const Parametros = db.parametros;
 
 exports.parametros = (req, res) => {
-    Parametros.findOne().sort({ _id: -1 }).limit(1).exec((err, parametro) => {
+    Parametros.findOne().limit(1).exec((err, parametro) => {
         res.status(200).send(parametro);
     });
 };

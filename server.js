@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const dbConfig = require("./app/config/db.config");
+var mongoClient = require("mongodb").MongoClient;
 
 const app = express();
 
@@ -45,7 +46,7 @@ const Parametros = db.recorde;
 
 // Database parameters
 db.mongoose
-  .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
+  .connect(`mongodb://badlyplayed:iV24v0B85ulNMgQCfrlFAH9Bfjaz2dQA4w43Fz0MnGWGxr2xXob2vObgtUI1b8zfPkuq4fEPkcrkw4vUS94zhg==@badlyplayed.mongo.cosmos.azure.com:10255/?ssl=true&appName=@badlyplayed@`, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
@@ -57,6 +58,7 @@ db.mongoose
     console.error("Connection error", err);
     process.exit();
   });
+
 
 // simple route
 app.get("/", (req, res) => {
@@ -78,6 +80,7 @@ app.listen(PORT, () => {
 
 // Carga inicial de dados
 function initial() {
+
   Role.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {
       new Role({
@@ -129,7 +132,7 @@ function initial() {
     }
   });
 
-  Parametros.estimatedDocumentCount((err, count) => {
+  Parametros.countDocuments((err, count) => {
     if (!err && count === 0) {
 
       new Parametros({
